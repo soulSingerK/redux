@@ -1,5 +1,5 @@
 export function createStore(reducer) {
-  let currentState = {}
+  let currentState
   const currentListener = []
 
   function getState() {
@@ -7,9 +7,9 @@ export function createStore(reducer) {
   }
 
   function dispatch(action) {
-    console.log(action)
     currentState = reducer(currentState, action)
     currentListener.forEach(v => v())
+    return action
   }
 
   function subscribe(listener) {

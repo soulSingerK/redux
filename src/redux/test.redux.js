@@ -4,31 +4,26 @@ import { createStore } from './custom.redux'
 const ADDNUM = 'ADDNUM'
 const REDUCENUM = 'REDUCENUM'
 
-function num (state = 0, action) {
+const initState = { num: 10 } 
+
+function num (state = initState, action) {
   switch(action.type) {
     case ADDNUM:
-      return state + 1
+      return { ...state, num: state.num + 1 }
     case REDUCENUM:
-      return state - 1
+      return { ...state, num: state.num - 1 }
     default:
-      return 10
+      return state
   }
 }
 
-function doAdd() {
+export function doAdd() {
   return { type: ADDNUM }
 }
 
-function doReduce() {
+export function doReduce() {
   return { type: REDUCENUM }
 }
-
 const store = createStore(num)
-console.log(store.getState())
-
-store.dispatch(doAdd())
-console.log(store.getState())
-store.dispatch(doReduce())
-console.log(store.getState())
 
 export default store
